@@ -1,5 +1,5 @@
 // POST /api/kiwify-webhook/[slug] — recebe webhook da Kiwify, dispara Purchase + cria acesso
-import { hashEmail, hashPhone, getClientIP, genEventId } from '../_utils.js';
+import { hashEmail, hashPhone, getClientIP, genEventId } from '../../_utils.js';
 
 function gerarToken() {
   const bytes = new Uint8Array(32);
