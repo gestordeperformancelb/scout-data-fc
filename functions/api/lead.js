@@ -15,8 +15,8 @@ export async function onRequestPost(ctx) {
 
   if (!email) return json({ ok: false, error: 'email required' }, 400);
 
-  const emailHash = hashEmail(email);
-  const phoneHash = phone ? hashPhone(phone) : null;
+  const emailHash = await hashEmail(email);
+  const phoneHash = phone ? await hashPhone(phone) : null;
   const ip = getClientIP(request);
   const ua = request.headers.get('user-agent') || '';
   const event_id = genEventId('lead');

@@ -1,11 +1,11 @@
 // Utilitários compartilhados entre os Workers
 
-export function hashEmail(email) {
+export async function hashEmail(email) {
   const normalized = email.trim().toLowerCase();
   return sha256Hex(normalized);
 }
 
-export function hashPhone(phone) {
+export async function hashPhone(phone) {
   const normalized = phone.replace(/\D/g, '');
   return sha256Hex(normalized);
 }

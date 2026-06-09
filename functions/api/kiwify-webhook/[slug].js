@@ -102,8 +102,8 @@ export async function onRequestPost(ctx) {
   const ip  = getClientIP(request);
   const ua  = request.headers.get('user-agent') || 'kiwify-webhook';
 
-  const emailHash = email ? hashEmail(email) : null;
-  const phoneHash = phone ? hashPhone(phone) : null;
+  const emailHash = email ? await hashEmail(email) : null;
+  const phoneHash = phone ? await hashPhone(phone) : null;
 
   // ── Detecta plano pelo nome do produto
   const nomeProd = product.toLowerCase();

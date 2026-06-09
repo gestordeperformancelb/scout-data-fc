@@ -28,8 +28,8 @@ export async function onRequestPost(ctx) {
 
   const ip = getClientIP(request);
   const ua = request.headers.get('user-agent') || '';
-  const emailHash = email ? hashEmail(email) : null;
-  const phoneHash = phone ? hashPhone(phone) : null;
+  const emailHash = email ? await hashEmail(email) : null;
+  const phoneHash = phone ? await hashPhone(phone) : null;
   const ts = Math.floor(Date.now() / 1000);
 
   // Salva no D1
