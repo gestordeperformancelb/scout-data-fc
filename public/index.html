@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Scout Data F.C. — Dados que Ganham Apostas</title>
-  <meta name="description" content="Estatísticas avançadas de jogadores e seleções da Copa do Mundo 2026. Análises criadas para apostadores sérios que querem vantagem real.">
+  <meta name="description" content="Painel com dados de 1.253 jogadores e 48 seleções da Copa do Mundo 2026. Para apostadores sérios que querem vantagem real.">
   <meta property="og:title" content="Scout Data F.C. — Dados que Ganham Apostas">
-  <meta property="og:description" content="Estatísticas avançadas da Copa do Mundo 2026 para apostadores sérios.">
+  <meta property="og:description" content="1.253 jogadores, 48 seleções, métricas avançadas. Copa do Mundo 2026.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,6 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --verde:    #1a3d1a;
       --verde-md: #2d6a2d;
@@ -25,21 +24,13 @@
       --branco:   #f4f9f4;
       --cinza:    #a0b0a0;
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--preto); color: var(--branco); line-height: 1.6; }
 
-    body {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      background: var(--preto);
-      color: var(--branco);
-      line-height: 1.6;
-    }
-
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(8,13,8,.92);
-      backdrop-filter: blur(12px);
+      background: rgba(8,13,8,.92); backdrop-filter: blur(12px);
       border-bottom: 1px solid #1a3d1a;
       padding: .75rem 1.5rem;
       display: flex; align-items: center; justify-content: space-between;
@@ -53,11 +44,10 @@
     }
     nav a.cta-nav:hover { background: var(--ouro-lt); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       position: relative; overflow: hidden;
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
+      padding: 5rem 1.5rem 4rem; text-align: center;
       background: radial-gradient(ellipse 80% 60% at 50% 0%, #1a3d1a 0%, var(--preto) 70%);
     }
     .hero-badge {
@@ -69,95 +59,65 @@
     .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(2.8rem, 8vw, 5.5rem);
-      line-height: 1.05;
-      letter-spacing: .02em;
-      margin-bottom: 1.25rem;
+      line-height: 1.05; letter-spacing: .02em; margin-bottom: 1.25rem;
     }
     .hero h1 em { color: var(--ouro); font-style: normal; }
-    .hero .sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      color: #a5d6a7;
-      max-width: 600px; margin: 0 auto 2rem;
-    }
+    .hero .sub { font-size: clamp(1rem, 2.5vw, 1.2rem); color: #a5d6a7; max-width: 600px; margin: 0 auto 2rem; }
     .hero-cta {
-      display: inline-block;
-      background: var(--ouro); color: #000;
-      font-size: 1.1rem; font-weight: 700;
-      padding: 1rem 2.5rem; border-radius: 8px;
+      display: inline-block; background: var(--ouro); color: #000;
+      font-size: 1.1rem; font-weight: 700; padding: 1rem 2.5rem; border-radius: 8px;
       text-decoration: none; transition: transform .15s, background .2s;
       box-shadow: 0 0 30px rgba(201,162,39,.35);
     }
     .hero-cta:hover { background: var(--ouro-lt); transform: translateY(-2px); }
-    .hero-proof {
-      margin-top: 1.5rem; color: var(--cinza);
-      font-size: .85rem;
-    }
+    .hero-proof { margin-top: 1.5rem; color: var(--cinza); font-size: .85rem; }
     .hero-proof strong { color: var(--branco); }
 
-    /* ── STATS STRIP ── */
+    /* STATS STRIP */
     .stats-strip {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+      display: flex; flex-wrap: wrap; justify-content: center;
       border-top: 1px solid #1a3d1a; border-bottom: 1px solid #1a3d1a;
       background: #0d1a0d;
     }
-    .stat-item {
-      flex: 1 1 150px; padding: 1.5rem 1rem; text-align: center;
-      border-right: 1px solid #1a3d1a;
-    }
+    .stat-item { flex: 1 1 150px; padding: 1.5rem 1rem; text-align: center; border-right: 1px solid #1a3d1a; }
     .stat-item:last-child { border-right: none; }
     .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--ouro); }
     .stat-lbl { font-size: .8rem; color: var(--cinza); text-transform: uppercase; letter-spacing: .06em; }
 
-    /* ── SEÇÕES GENÉRICAS ── */
+    /* SEÇÕES */
     section { padding: 4.5rem 1.5rem; max-width: 900px; margin: 0 auto; }
     .section-label {
       display: block; font-size: .75rem; font-weight: 700; letter-spacing: .12em;
       text-transform: uppercase; color: var(--verde-lt); margin-bottom: .6rem;
     }
-    h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      line-height: 1.1; margin-bottom: 1rem;
-      letter-spacing: .02em;
-    }
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 1rem; letter-spacing: .02em; }
     h2 em { color: var(--ouro); font-style: normal; }
     p.lead { color: #a5d6a7; font-size: 1.05rem; max-width: 660px; }
 
-    /* ── PARA QUEM É ── */
-    .for-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem; margin-top: 2rem;
-    }
-    .for-card {
-      background: #0d1a0d; border: 1px solid #1a3d1a;
-      border-radius: 12px; padding: 1.5rem;
-    }
+    /* PARA QUEM É */
+    .for-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .for-card { background: #0d1a0d; border: 1px solid #1a3d1a; border-radius: 12px; padding: 1.5rem; }
     .for-card .icon { font-size: 1.8rem; margin-bottom: .75rem; }
     .for-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; color: var(--branco); }
     .for-card p { font-size: .875rem; color: var(--cinza); }
 
-    /* ── O QUE ESTÁ DENTRO ── */
+    /* O QUE ESTÁ DENTRO */
     .inside-list { list-style: none; margin-top: 1.75rem; display: flex; flex-direction: column; gap: .85rem; }
     .inside-list li {
       display: flex; align-items: flex-start; gap: .85rem;
-      background: #0d1a0d; border: 1px solid #1a3d1a;
-      border-radius: 10px; padding: 1rem 1.2rem;
+      background: #0d1a0d; border: 1px solid #1a3d1a; border-radius: 10px; padding: 1rem 1.2rem;
     }
     .inside-list li .check {
       width: 22px; height: 22px; border-radius: 50%;
       background: rgba(76,175,80,.15); border: 1px solid var(--verde-lt);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
     }
     .inside-list li .check::after { content: '✓'; color: var(--verde-lt); font-size: .75rem; font-weight: 700; }
     .inside-list li .txt strong { display: block; font-size: .95rem; color: var(--branco); margin-bottom: .2rem; }
     .inside-list li .txt span { font-size: .85rem; color: var(--cinza); }
 
-    /* ── DIFERENCIAIS ── */
-    .diff-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem; margin-top: 2rem;
-    }
+    /* DIFERENCIAIS */
+    .diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
     .diff-card {
       background: #0d1a0d; border: 1px solid #1a3d1a;
       border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden;
@@ -169,84 +129,79 @@
     .diff-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .5rem; color: var(--ouro); }
     .diff-card p { font-size: .85rem; color: var(--cinza); }
 
-    /* ── FORMULÁRIO LEAD ── */
-    .lead-section {
-      background: #0d1a0d;
-      border-top: 1px solid #1a3d1a;
-      border-bottom: 1px solid #1a3d1a;
-      padding: 4rem 1.5rem; text-align: center;
-    }
-    .lead-section h2 { margin-bottom: .75rem; }
-    .lead-section p { color: var(--cinza); margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto; }
-
-    #lead-form {
-      display: flex; flex-wrap: wrap; gap: .75rem;
-      justify-content: center; max-width: 560px; margin: 0 auto;
-    }
-    #lead-form input {
-      flex: 1 1 220px;
-      background: #111b11; border: 1px solid #2d6a2d; border-radius: 8px;
-      color: var(--branco); font-size: 1rem; padding: .85rem 1rem;
-      outline: none; font-family: inherit;
-    }
-    #lead-form input::placeholder { color: #557755; }
-    #lead-form input:focus { border-color: var(--ouro); }
-    #lead-form button {
-      background: var(--ouro); color: #000;
-      font-weight: 700; font-size: 1rem;
-      padding: .85rem 1.75rem; border: none; border-radius: 8px;
-      cursor: pointer; font-family: inherit; transition: background .2s;
-      white-space: nowrap;
-    }
-    #lead-form button:hover { background: var(--ouro-lt); }
-
-    #calendly-container {
-      display: none; margin-top: 2rem;
-      min-height: 700px; border-radius: 12px; overflow: hidden;
-    }
-
-    #form-success {
-      display: none; margin-top: 1.5rem;
-      background: rgba(76,175,80,.1); border: 1px solid var(--verde-lt);
-      border-radius: 10px; padding: 1.25rem; color: var(--verde-lt); font-weight: 600;
-    }
-
-    /* ── CTA FINAL ── */
-    .cta-section {
-      padding: 5rem 1.5rem; text-align: center;
+    /* PLANOS */
+    .planos-section {
+      padding: 5rem 1.5rem;
       background: radial-gradient(ellipse 70% 50% at 50% 100%, #1a3d1a 0%, var(--preto) 70%);
     }
-    .cta-section h2 { margin-bottom: 1rem; }
-    .cta-section p { color: var(--cinza); margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto; }
-    .cta-price {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.5rem; color: var(--ouro); line-height: 1;
-      margin-bottom: .5rem;
-    }
-    .cta-price-sub { color: var(--cinza); font-size: .85rem; margin-bottom: 2rem; }
-    .btn-comprar {
-      display: inline-block;
-      background: var(--ouro); color: #000;
-      font-size: 1.2rem; font-weight: 700;
-      padding: 1.1rem 3rem; border-radius: 8px;
-      text-decoration: none; transition: transform .15s, background .2s;
-      box-shadow: 0 0 40px rgba(201,162,39,.4);
-    }
-    .btn-comprar:hover { background: var(--ouro-lt); transform: translateY(-2px); }
-    .garantia { margin-top: 1rem; color: var(--cinza); font-size: .85rem; }
+    .planos-section .inner { max-width: 960px; margin: 0 auto; text-align: center; }
+    .planos-section h2 { margin-bottom: .75rem; }
+    .planos-section > .inner > p { color: var(--cinza); margin-bottom: 3rem; }
 
-    /* ── FOOTER ── */
+    .planos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; align-items: stretch;
+    }
+    .plano-card {
+      background: #0d1a0d; border: 1px solid #1a3d1a;
+      border-radius: 16px; padding: 2rem 1.75rem;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .plano-card:hover { transform: translateY(-4px); border-color: var(--verde-md); }
+    .plano-card.destaque {
+      border-color: var(--ouro);
+      box-shadow: 0 0 40px rgba(201,162,39,.2);
+    }
+    .plano-card.destaque::before {
+      content: '⭐ MAIS POPULAR';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      background: var(--ouro); color: #000;
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+      padding: .3rem 1rem; border-radius: 0 0 8px 8px;
+    }
+    .plano-nome {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; letter-spacing: .05em;
+      color: var(--branco); margin-top: .5rem; margin-bottom: .25rem;
+    }
+    .plano-card.destaque .plano-nome { color: var(--ouro); }
+    .plano-desc { font-size: .85rem; color: var(--cinza); margin-bottom: 1.5rem; min-height: 2.5rem; }
+    .plano-preco {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; color: var(--ouro); line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .plano-preco-sub { font-size: .8rem; color: var(--cinza); margin-bottom: 1.75rem; }
+    .plano-features { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin-bottom: 2rem; flex: 1; }
+    .plano-features li { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: var(--cinza); }
+    .plano-features li::before { content: '✓'; color: var(--verde-lt); font-weight: 700; flex-shrink: 0; }
+    .plano-features li.bloq { color: #3d4d3d; }
+    .plano-features li.bloq::before { content: '✕'; color: #3d4d3d; }
+    .btn-plano {
+      display: block; text-align: center; text-decoration: none;
+      background: #1a3d1a; color: var(--branco);
+      border: 1px solid var(--verde-md);
+      font-weight: 700; font-size: 1rem;
+      padding: .9rem 1rem; border-radius: 8px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-plano:hover { background: var(--verde-md); transform: translateY(-1px); }
+    .plano-card.destaque .btn-plano {
+      background: var(--ouro); color: #000; border-color: var(--ouro);
+    }
+    .plano-card.destaque .btn-plano:hover { background: var(--ouro-lt); }
+    .garantia-txt { margin-top: 2rem; color: var(--cinza); font-size: .82rem; }
+
+    /* FOOTER */
     footer {
-      background: #050c05;
-      border-top: 1px solid #1a3d1a;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      color: #557755;
-      font-size: .8rem;
+      background: #050c05; border-top: 1px solid #1a3d1a;
+      padding: 2rem 1.5rem; text-align: center; color: #557755; font-size: .8rem;
     }
     footer strong { color: var(--cinza); }
 
-    /* ── RESPONSIVO ── */
     @media (max-width: 600px) {
       .stat-item { border-right: none; border-bottom: 1px solid #1a3d1a; }
       .stat-item:last-child { border-bottom: none; }
@@ -258,7 +213,7 @@
 <!-- NAV -->
 <nav>
   <div class="logo">Scout Data <span>F.C.</span></div>
-  <a class="cta-nav" href="#comprar">Quero os Dados →</a>
+  <a class="cta-nav" href="#planos">Quero os Dados →</a>
 </nav>
 
 <!-- HERO -->
@@ -266,18 +221,18 @@
   <div class="hero-badge">Copa do Mundo 2026 · Análise Profissional</div>
   <h1>Os dados que os <em>apostadores sérios</em><br>usam para ganhar.</h1>
   <p class="sub">
-    Estatísticas avançadas de jogadores e seleções — desempenho real, tendências históricas e métricas que as casas de aposta não mostram para você.
+    Painel interativo com estatísticas avançadas de 1.253 jogadores e 48 seleções — métricas reais que as casas de aposta não mostram para você.
   </p>
-  <a class="hero-cta" href="#comprar">Acessar Scout Data F.C.</a>
+  <a class="hero-cta" href="#planos">Ver os planos →</a>
   <p class="hero-proof">
-    <strong>Acesso único.</strong> Ebook PDF + Painel de dados por jogador e seleção.
+    <strong>Pagamento único.</strong> Acesso durante toda a Copa do Mundo 2026.
   </p>
 </section>
 
 <!-- STATS STRIP -->
 <div class="stats-strip">
   <div class="stat-item"><div class="stat-num">48</div><div class="stat-lbl">Seleções analisadas</div></div>
-  <div class="stat-item"><div class="stat-num">500+</div><div class="stat-lbl">Jogadores mapeados</div></div>
+  <div class="stat-item"><div class="stat-num">1.253</div><div class="stat-lbl">Jogadores mapeados</div></div>
   <div class="stat-item"><div class="stat-num">80+</div><div class="stat-lbl">Métricas por jogador</div></div>
   <div class="stat-item"><div class="stat-num">2026</div><div class="stat-lbl">Copa do Mundo USA/MEX/CAN</div></div>
 </div>
@@ -314,29 +269,29 @@
     <li>
       <div class="check"></div>
       <div class="txt">
-        <strong>Ebook PDF — Guia Completo Copa 2026</strong>
-        <span>Análise detalhada das 48 seleções classificadas, grupos, fase de mata-mata e histórico de desempenho em Copas anteriores.</span>
+        <strong>Painel de jogadores — 1.253 atletas convocados</strong>
+        <span>Gols, assistências, rating, xG, minutos jogados, cartões, duelos aéreos e muito mais. Filtre por seleção, posição e ordenação.</span>
       </div>
     </li>
     <li>
       <div class="check"></div>
       <div class="txt">
-        <strong>Painel SaaS — Dados por jogador</strong>
-        <span>Acesso ao painel interativo com mais de 80 métricas por jogador: gols, assistências, xG, xA, dribbles, duelos aéreos, cartões, minutos jogados e muito mais.</span>
+        <strong>Dados por seleção — 48 países</strong>
+        <span>Posse de bola, sistema tático, forma recente, desempenho nas eliminatórias e ranking FIFA.</span>
       </div>
     </li>
     <li>
       <div class="check"></div>
       <div class="txt">
-        <strong>Dados por seleção</strong>
-        <span>Posse de bola, sistema tático, forma recente, desempenho em eliminatórias, consistência ofensiva e defensiva.</span>
+        <strong>Rankings e notas por posição</strong>
+        <span>Top artilheiros, assistentes, melhores ratings por goleiro, defensor, meia e atacante.</span>
       </div>
     </li>
     <li>
       <div class="check"></div>
       <div class="txt">
-        <strong>Tendências de mercado de apostas</strong>
-        <span>Quais padrões históricos se repetem em Copas do Mundo e como isso impacta odds de gols, cartões e resultado final.</span>
+        <strong>Análise do dia e Jogador da rodada</strong>
+        <span>Destaques atualizados a cada rodada para você apostar com contexto real do torneio.</span>
       </div>
     </li>
     <li>
@@ -361,45 +316,78 @@
     </div>
     <div class="diff-card">
       <h3>Métricas avançadas</h3>
-      <p>Além de gols e assistências: xG, xGA, PPDA, pressão, sequência de form — indicadores que as casas de aposta precificam, mas não mostram.</p>
+      <p>Além de gols e assistências: xG, pressão, sequência de form — indicadores que as casas precificam, mas não mostram.</p>
     </div>
     <div class="diff-card">
       <h3>Formato apostador</h3>
       <p>Dados organizados para facilitar sua análise pré-jogo, não para impressionar analistas de TV.</p>
     </div>
     <div class="diff-card">
-      <h3>Acesso único</h3>
+      <h3>Pagamento único</h3>
       <p>Paga uma vez, usa durante toda a Copa. Sem assinatura, sem surpresa no cartão.</p>
     </div>
   </div>
 </section>
 
-<!-- LEAD CAPTURE -->
-<div class="lead-section" id="pre-inscricao">
-  <h2>Receba uma <em>amostra gratuita</em></h2>
-  <p>Deixe seu e-mail e envio uma prévia com análise de 3 seleções favoritas para a Copa 2026.</p>
-  <form id="lead-form">
-    <input type="text"  id="lead-name"  placeholder="Seu nome" required>
-    <input type="email" id="lead-email" placeholder="Seu melhor e-mail" required>
-    <button type="submit">Quero a amostra</button>
-  </form>
-  <div id="form-success">Enviado! Verifique seu e-mail em instantes.</div>
-  <div id="calendly-container">
-    <!-- Calendly inline widget carregado via JS após submit -->
-  </div>
-</div>
+<!-- PLANOS -->
+<div class="planos-section" id="planos">
+  <div class="inner">
+    <span class="section-label" style="display:block;margin-bottom:.6rem">Escolha seu plano</span>
+    <h2>Acesso ao <em>Scout Data F.C.</em></h2>
+    <p>Pagamento único · Acesso até o fim da Copa do Mundo 2026</p>
 
-<!-- CTA FINAL -->
-<div class="cta-section" id="comprar">
-  <span class="section-label">Oferta de lançamento</span>
-  <h2>Acesso completo ao <em>Scout Data F.C.</em></h2>
-  <p>Ebook PDF + Painel interativo com dados de 500+ jogadores e 48 seleções. Atualizado durante toda a Copa 2026.</p>
-  <div class="cta-price">R$&nbsp;97</div>
-  <div class="cta-price-sub">pagamento único · acesso imediato</div>
-  <a class="btn-comprar" href="https://pay.kiwify.com.br/SUBSTITUA_AQUI" id="btn-comprar">
-    Quero acesso agora →
-  </a>
-  <p class="garantia">🔒 Pagamento seguro via Kiwify · Garantia de 7 dias</p>
+    <div class="planos-grid">
+
+      <!-- TITULAR -->
+      <div class="plano-card">
+        <div class="plano-nome">Titular</div>
+        <div class="plano-desc">O essencial para começar a apostar com dados.</div>
+        <div class="plano-preco">R$&nbsp;47</div>
+        <div class="plano-preco-sub">pagamento único</div>
+        <ul class="plano-features">
+          <li>Painel com 1.253 jogadores</li>
+          <li>Dados das 48 seleções</li>
+          <li>Rankings e notas por posição</li>
+          <li>Análise do dia</li>
+          <li>Jogador da rodada</li>
+          <li class="bloq">Pergunte ao Mister (IA)</li>
+        </ul>
+        <a class="btn-plano btn-titular" href="https://pay.kiwify.com.br/xCTPdIt" target="_blank">Quero o Titular →</a>
+      </div>
+
+      <!-- CRAQUE -->
+      <div class="plano-card destaque">
+        <div class="plano-nome">Craque</div>
+        <div class="plano-desc">Para quem quer ir além e consultar a IA com dados reais.</div>
+        <div class="plano-preco">R$&nbsp;89,90</div>
+        <div class="plano-preco-sub">pagamento único</div>
+        <ul class="plano-features">
+          <li>Tudo do Titular</li>
+          <li>30 perguntas ao Mister (IA)</li>
+          <li>Análises táticas personalizadas</li>
+          <li>Dicas baseadas em dados reais</li>
+        </ul>
+        <a class="btn-plano btn-craque" href="https://kiwify.app/dQoxP9S" target="_blank">Quero o Craque →</a>
+      </div>
+
+      <!-- CAPITÃO -->
+      <div class="plano-card">
+        <div class="plano-nome">Capitão</div>
+        <div class="plano-desc">Acesso máximo para os 39 dias da Copa com 3 perguntas por dia.</div>
+        <div class="plano-preco">R$&nbsp;147,90</div>
+        <div class="plano-preco-sub">pagamento único</div>
+        <ul class="plano-features">
+          <li>Tudo do Craque</li>
+          <li>117 perguntas ao Mister (3/dia)</li>
+          <li>Cobertura completa da Copa</li>
+          <li>Prioridade em atualizações</li>
+        </ul>
+        <a class="btn-plano btn-capitao" href="https://pay.kiwify.com.br/b0B2i0q" target="_blank">Quero o Capitão →</a>
+      </div>
+
+    </div>
+    <p class="garantia-txt">🔒 Pagamento seguro via Kiwify · Garantia de 7 dias · Acesso imediato por email</p>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -426,14 +414,12 @@ fbq('track', 'PageView');
 <script>
   window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js',new Date());
-  gtag('config','GA4_MEASUREMENT_ID_PLACEHOLDER');
+  gtag('js',new Date()); gtag('config','GA4_MEASUREMENT_ID_PLACEHOLDER');
 </script>
 
-<!-- TRACKING + FORM -->
+<!-- TRACKING -->
 <script>
 (function() {
-  // Helpers
   function getCookie(name) {
     const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
     return v ? v.pop() : '';
@@ -441,36 +427,18 @@ fbq('track', 'PageView');
   function genEventId(prefix) {
     return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
   }
-  function getUTMs() {
-    const p = new URLSearchParams(location.search);
-    return {
-      utm_source:   p.get('utm_source'),
-      utm_medium:   p.get('utm_medium'),
-      utm_campaign: p.get('utm_campaign'),
-    };
-  }
-
   const fbp = getCookie('_fbp');
-  const fbc = getCookie('_fbc') || new URLSearchParams(location.search).get('fbclid')
-              ? 'fb.1.' + Date.now() + '.' + new URLSearchParams(location.search).get('fbclid')
-              : '';
+  const fbc = getCookie('_fbc') || (new URLSearchParams(location.search).get('fbclid')
+    ? 'fb.1.' + Date.now() + '.' + new URLSearchParams(location.search).get('fbclid') : '');
 
-  // PageView server-side
   fetch('/api/track', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      event_name: 'PageView',
-      event_id:   genEventId('pv'),
-      url:        location.href,
-      referrer:   document.referrer,
-      fbp, fbc,
-    }),
+    body: JSON.stringify({ event_name: 'PageView', event_id: genEventId('pv'), url: location.href, referrer: document.referrer, fbp, fbc }),
   }).catch(() => {});
 
-  // ViewContent ao scroll 30%
   let vcSent = false;
-  window.addEventListener('scroll', function onScroll() {
+  window.addEventListener('scroll', function() {
     if (vcSent) return;
     const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
     if (pct >= 0.3) {
@@ -479,65 +447,29 @@ fbq('track', 'PageView');
       fetch('/api/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_name: 'ViewContent',
-          event_id:   genEventId('vc'),
-          url: location.href, fbp, fbc,
-        }),
+        body: JSON.stringify({ event_name: 'ViewContent', event_id: genEventId('vc'), url: location.href, fbp, fbc }),
       }).catch(() => {});
     }
   }, { passive: true });
 
-  // InitiateCheckout ao clicar em comprar
-  document.getElementById('btn-comprar').addEventListener('click', function() {
-    const eid = genEventId('ic');
-    fbq('track', 'InitiateCheckout', {}, { eventID: eid });
-    fetch('/api/track', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        event_name: 'InitiateCheckout',
-        event_id: eid,
-        url: location.href, fbp, fbc,
-        value: 97, currency: 'BRL',
-      }),
-    }).catch(() => {});
-  });
-
-  // Formulário de lead
-  document.getElementById('lead-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const name  = document.getElementById('lead-name').value.trim();
-    const email = document.getElementById('lead-email').value.trim();
-    if (!email) return;
-
-    const eid = genEventId('lead');
-    const utms = getUTMs();
-
-    fbq('track', 'Lead', {}, { eventID: eid });
-
-    try {
-      await fetch('/api/lead', {
+  // InitiateCheckout em cada botão de plano
+  const planos = [
+    { sel: '.btn-titular',  valor: 47,     nome: 'Titular' },
+    { sel: '.btn-craque',   valor: 89.9,   nome: 'Craque' },
+    { sel: '.btn-capitao',  valor: 147.9,  nome: 'Capitão' },
+  ];
+  planos.forEach(({ sel, valor, nome }) => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    el.addEventListener('click', function() {
+      const eid = genEventId('ic');
+      fbq('track', 'InitiateCheckout', { value: valor, currency: 'BRL', content_name: nome }, { eventID: eid });
+      fetch('/api/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, fbp, fbc, url: location.href, ...utms }),
-      });
-    } catch (_) {}
-
-    // Mostra sucesso + Calendly
-    this.style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-
-    // Carrega Calendly inline
-    const cal = document.getElementById('calendly-container');
-    cal.style.display = 'block';
-    cal.innerHTML = `<div class="calendly-inline-widget"
-      data-url="https://calendly.com/SUBSTITUA_CALENDLY_SLUG"
-      style="min-width:320px;height:700px;"></div>`;
-    const s = document.createElement('script');
-    s.src = 'https://assets.calendly.com/assets/external/widget.js';
-    s.async = true;
-    document.head.appendChild(s);
+        body: JSON.stringify({ event_name: 'InitiateCheckout', event_id: eid, url: location.href, fbp, fbc, value: valor, currency: 'BRL' }),
+      }).catch(() => {});
+    });
   });
 })();
 </script>
