@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a120a"/>
+      <stop offset="100%" style="stop-color:#1a3d1a"/>
+    </linearGradient>
+    <linearGradient id="ouroGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0c040"/>
+      <stop offset="100%" style="stop-color:#c9a227"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="800" height="800" fill="url(#bgGrad)"/>
+
+  <!-- Borda externa dourada -->
+  <rect x="18" y="18" width="764" height="764" rx="24" ry="24"
+        fill="none" stroke="#c9a227" stroke-width="3" opacity="0.6"/>
+
+  <!-- Escudo central -->
+  <path d="M400 130 L530 180 L530 340 Q530 460 400 530 Q270 460 270 340 L270 180 Z"
+        fill="#0d1a0d" stroke="url(#ouroGrad)" stroke-width="4"/>
+
+  <!-- Linhas de campo dentro do escudo -->
+  <line x1="270" y1="260" x2="530" y2="260" stroke="#2d6a2d" stroke-width="1.5" opacity="0.7"/>
+  <ellipse cx="400" cy="260" rx="45" ry="28" fill="none" stroke="#2d6a2d" stroke-width="1.5" opacity="0.7"/>
+  <line x1="400" y1="180" x2="400" y2="530" stroke="#2d6a2d" stroke-width="1" opacity="0.4" stroke-dasharray="6,4"/>
+
+  <!-- Bola de futebol estilizada (centro do escudo) -->
+  <circle cx="400" cy="310" r="62" fill="#1a3d1a" stroke="url(#ouroGrad)" stroke-width="3" filter="url(#glow)"/>
+  <!-- Hexágonos da bola -->
+  <polygon points="400,258 443,280 443,326 400,348 357,326 357,280"
+           fill="none" stroke="#c9a227" stroke-width="2.5" opacity="0.9"/>
+  <line x1="400" y1="258" x2="400" y2="230" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+  <line x1="443" y1="280" x2="465" y2="268" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+  <line x1="443" y1="326" x2="465" y2="338" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+  <line x1="400" y1="348" x2="400" y2="376" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+  <line x1="357" y1="326" x2="335" y2="338" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+  <line x1="357" y1="280" x2="335" y2="268" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+  <!-- Centro da bola -->
+  <circle cx="400" cy="310" r="10" fill="url(#ouroGrad)" opacity="0.9"/>
+
+  <!-- Barras de dados (gráfico de barras abaixo da bola) -->
+  <rect x="358" y="395" width="12" height="30" rx="2" fill="#4caf50" opacity="0.8"/>
+  <rect x="376" y="383" width="12" height="42" rx="2" fill="#c9a227" opacity="0.9"/>
+  <rect x="394" y="372" width="12" height="53" rx="2" fill="#4caf50" opacity="0.8"/>
+  <rect x="412" y="380" width="12" height="45" rx="2" fill="#c9a227" opacity="0.9"/>
+  <rect x="430" y="390" width="12" height="35" rx="2" fill="#4caf50" opacity="0.8"/>
+
+  <!-- SCOUT DATA -->
+  <text x="400" y="598"
+        font-family="Arial Black, Impact, sans-serif"
+        font-size="72"
+        font-weight="900"
+        fill="url(#ouroGrad)"
+        text-anchor="middle"
+        letter-spacing="4"
+        filter="url(#glow)">SCOUT DATA</text>
+
+  <!-- F.C. -->
+  <text x="400" y="660"
+        font-family="Arial Black, Impact, sans-serif"
+        font-size="52"
+        font-weight="900"
+        fill="#4caf50"
+        text-anchor="middle"
+        letter-spacing="10">F.C.</text>
+
+  <!-- Linha separadora -->
+  <line x1="160" y1="676" x2="640" y2="676" stroke="#c9a227" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Tagline -->
+  <text x="400" y="706"
+        font-family="Arial, sans-serif"
+        font-size="22"
+        fill="#a5d6a7"
+        text-anchor="middle"
+        letter-spacing="6"
+        opacity="0.85">COPA DO MUNDO 2026</text>
+
+  <!-- Estrelinhas decorativas -->
+  <text x="172" y="710" font-size="14" fill="#c9a227" opacity="0.7">★</text>
+  <text x="614" y="710" font-size="14" fill="#c9a227" opacity="0.7">★</text>
+</svg>

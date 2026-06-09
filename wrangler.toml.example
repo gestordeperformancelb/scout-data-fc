@@ -1,0 +1,24 @@
+name = "scout-data-fc"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "scout-data-fc-db"
+database_id = "SEU_D1_DATABASE_ID_AQUI"
+
+[vars]
+ENVIRONMENT = "production"
+
+# Gere os secrets com:
+#   openssl rand -hex 24   → DASH_KEY, SYNC_SECRET
+#   uuidgen                → KIWIFY_WEBHOOK_SLUG
+#
+# Adicione ao projeto Cloudflare Pages com:
+#   wrangler pages secret put DASH_KEY
+#   wrangler pages secret put META_PIXEL_ID
+#   wrangler pages secret put META_ACCESS_TOKEN
+#   wrangler pages secret put GA4_MEASUREMENT_ID
+#   wrangler pages secret put GA4_API_SECRET
+#   wrangler pages secret put KIWIFY_WEBHOOK_SLUG
+#   wrangler pages secret put SYNC_SECRET

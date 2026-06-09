@@ -1,0 +1,20 @@
+name = "scout-data-fc"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "scout-data-fc-db"
+database_id = "406b3660-bc10-4105-9f2c-3582c4e4fc08"
+
+[vars]
+ENVIRONMENT = "production"
+
+# Secrets (set via: wrangler pages secret put <NAME>)
+# DASH_KEY
+# META_PIXEL_ID
+# META_ACCESS_TOKEN
+# GA4_MEASUREMENT_ID
+# GA4_API_SECRET
+# KIWIFY_WEBHOOK_SLUG
+# SYNC_SECRET

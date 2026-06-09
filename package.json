@@ -1,0 +1,20 @@
+{
+  "name": "scout-data-fc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public --d1=DB",
+    "deploy": "wrangler pages deploy public --project-name=scout-data-fc",
+    "db:init": "wrangler d1 execute scout-data-fc-db --file=migrations/0001_initial.sql",
+    "db:init:remote": "wrangler d1 execute scout-data-fc-db --file=migrations/0001_initial.sql --remote",
+    "db:dash": "wrangler d1 execute scout-data-fc-db --command='SELECT event_name, COUNT(*) as total FROM events GROUP BY event_name' --remote",
+    "sync": "RAPIDAPI_KEY=$RAPIDAPI_KEY node scripts/sync-sofascore.js",
+    "build-painel": "node scripts/build-painel.js",
+    "sync-stats": "RAPIDAPI_KEY=$RAPIDAPI_KEY node scripts/sync-stats-clube.js",
+    "db:migrate2": "wrangler d1 execute scout-data-fc-db --file=migrations/0002_sofascore_data.sql --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^3.57.0"
+  }
+}
