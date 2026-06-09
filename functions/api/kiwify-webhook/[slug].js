@@ -69,6 +69,22 @@ export async function onRequestPost(ctx) {
   try { body = await request.json(); }
   catch { return new Response('invalid json', { status: 400 }); }
 
+  // ── DEBUG: grava payload bruto antes de qualquer processamento
+  try {
+    await env.DB.prepare(
+      `CREATE TABLE IF NOT EXISTS webhook_debug (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        recebido_em TEXT NOT NULL DEFAULT (datetime('now')),
+        payload TEXT
+      )`
+    ).run();
+    await env.DB.prepare(
+      `INSERT INTO webhook_debug (payload) VALUES (?)`
+    ).bind(JSON.stringify(body)).run();
+  } catch (e) {
+    console.error('debug log error:', e?.message);
+  }
+
   // Só processa compras aprovadas
   const status = body?.order?.order_status ?? body?.order?.status ?? body?.status;
   if (status !== 'paid' && status !== 'approved') {
