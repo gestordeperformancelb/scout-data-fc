@@ -85,18 +85,21 @@ export async function onRequestPost(ctx) {
     console.error('debug log error:', e?.message);
   }
 
+  // A Kiwify pode enviar os campos na raiz ou dentro de "order"
+  const data = body?.order ?? body;
+
   // Só processa compras aprovadas
-  const status = body?.order?.order_status ?? body?.order?.status ?? body?.status;
+  const status = data?.order_status ?? data?.status;
   if (status !== 'paid' && status !== 'approved') {
     return new Response('ignored', { status: 200 });
   }
 
-  const orderId = body?.order?.order_id ?? body?.order?.id ?? body?.id ?? genEventId('order');
-  const email   = body?.order?.Customer?.email ?? body?.Customer?.email ?? null;
-  const nome    = body?.order?.Customer?.full_name ?? body?.Customer?.full_name ?? null;
-  const phone   = body?.order?.Customer?.mobile ?? body?.Customer?.mobile ?? null;
-  const value   = parseFloat(body?.order?.Commissions?.charge_amount ?? body?.order?.charges?.[0]?.amount ?? 0) / 100;
-  const product = body?.order?.Product?.product_name ?? body?.Product?.name ?? 'Scout Data F.C.';
+  const orderId = data?.order_id ?? data?.id ?? genEventId('order');
+  const email   = data?.Customer?.email ?? null;
+  const nome    = data?.Customer?.full_name ?? null;
+  const phone   = data?.Customer?.mobile ?? null;
+  const value   = parseFloat(data?.Commissions?.charge_amount ?? data?.charges?.[0]?.amount ?? 0) / 100;
+  const product = data?.Product?.product_name ?? data?.Product?.name ?? 'Scout Data F.C.';
   const event_id = `purchase_${orderId}`;
   const ts  = Math.floor(Date.now() / 1000);
   const ip  = getClientIP(request);
