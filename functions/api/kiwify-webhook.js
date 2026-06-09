@@ -70,17 +70,17 @@ export async function onRequestPost(ctx) {
   catch { return new Response('invalid json', { status: 400 }); }
 
   // Só processa compras aprovadas
-  const status = body?.order?.status ?? body?.status;
+  const status = body?.order?.order_status ?? body?.order?.status ?? body?.status;
   if (status !== 'paid' && status !== 'approved') {
     return new Response('ignored', { status: 200 });
   }
 
-  const orderId = body?.order?.id ?? body?.id ?? genEventId('order');
-  const email   = body?.Customer?.email ?? body?.customer?.email ?? null;
-  const nome    = body?.Customer?.full_name ?? body?.customer?.full_name ?? null;
-  const phone   = body?.Customer?.mobile ?? body?.customer?.mobile ?? null;
-  const value   = parseFloat(body?.order?.charges?.[0]?.amount ?? body?.amount ?? 0) / 100;
-  const product = body?.Product?.name ?? body?.product?.name ?? 'Scout Data F.C.';
+  const orderId = body?.order?.order_id ?? body?.order?.id ?? body?.id ?? genEventId('order');
+  const email   = body?.order?.Customer?.email ?? body?.Customer?.email ?? null;
+  const nome    = body?.order?.Customer?.full_name ?? body?.Customer?.full_name ?? null;
+  const phone   = body?.order?.Customer?.mobile ?? body?.Customer?.mobile ?? null;
+  const value   = parseFloat(body?.order?.Commissions?.charge_amount ?? body?.order?.charges?.[0]?.amount ?? 0) / 100;
+  const product = body?.order?.Product?.product_name ?? body?.Product?.name ?? 'Scout Data F.C.';
   const event_id = `purchase_${orderId}`;
   const ts  = Math.floor(Date.now() / 1000);
   const ip  = getClientIP(request);
