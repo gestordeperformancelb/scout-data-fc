@@ -102,7 +102,7 @@ ${CONTEXTO}`;
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-3-5-haiku-20241022',
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 600,
         system: systemPrompt,
         messages: [{ role: 'user', content: question.trim() }],
@@ -112,7 +112,7 @@ ${CONTEXTO}`;
     if (!aiRes.ok) {
       const err = await aiRes.text().catch(() => '');
       console.error('Anthropic error:', aiRes.status, err);
-      return new Response(JSON.stringify({ error: 'Erro ao consultar IA', _debug_status: aiRes.status, _debug_body: err.slice(0, 400) }), { status: 502, headers: CORS });
+      return new Response(JSON.stringify({ error: 'Erro ao consultar IA' }), { status: 502, headers: CORS });
     }
 
     const aiData = await aiRes.json();
@@ -120,7 +120,7 @@ ${CONTEXTO}`;
     if (!answer) return new Response(JSON.stringify({ error: 'Resposta vazia' }), { status: 502, headers: CORS });
   } catch (e) {
     console.error('Fetch error:', e?.message);
-    return new Response(JSON.stringify({ error: 'Erro de conexão com IA', _debug_msg: String(e?.message || e), _debug_stack: String(e?.stack || '').slice(0, 300) }), { status: 502, headers: CORS });
+    return new Response(JSON.stringify({ error: 'Erro de conexão com IA' }), { status: 502, headers: CORS });
   }
 
   // ── Incrementa perguntas_mister no D1
