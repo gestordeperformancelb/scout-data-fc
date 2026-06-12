@@ -11713,8 +11713,13 @@ tr.sel-row:hover td{background:#0d1a0d}
       </div>
     </div>
 
-    <!-- Cards dos jogos (dinâmico) -->
-    <div id="analise-jogos-cards" style="margin-bottom:1.5rem"></div>
+    <!-- Carrossel de jogos -->
+    <div id="analise-jogos-cards" style="margin-bottom:1.5rem;position:relative">
+      <!-- Nav tabs -->
+      <div id="jogos-tabs" style="display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap"></div>
+      <!-- Slide container -->
+      <div id="jogos-slides" style="position:relative"></div>
+    </div>
 
     <!-- Texto da análise -->
     <div id="analise-texto" style="color:#c8d8c8;font-size:.95rem;line-height:1.9;background:#0d1a0d;border:1px solid #1a3d1a;border-left:3px solid #c9a227;border-radius:0 10px 10px 0;padding:1.75rem 1.75rem 1.75rem 1.5rem;margin-bottom:1.5rem"></div>
@@ -12090,11 +12095,40 @@ atualizarPips();
       jogosEl.appendChild(b);
     }
 
-    // Cards detalhados por jogo
-    const cardsEl = document.getElementById('analise-jogos-cards');
-    for (const j of (d.jogos ?? [])) {
+    // Carrossel de jogos
+    const tabsEl   = document.getElementById('jogos-tabs');
+    const slidesEl = document.getElementById('jogos-slides');
+    const jogos    = d.jogos ?? [];
+    let jogoAtivo  = 0;
+
+    function mostrarJogo(idx) {
+      jogoAtivo = idx;
+      slidesEl.querySelectorAll('[data-slide]').forEach((s, i) => {
+        s.style.display = i === idx ? '' : 'none';
+      });
+      tabsEl.querySelectorAll('[data-tab]').forEach((t, i) => {
+        t.style.background    = i === idx ? 'rgba(201,162,39,.18)' : 'rgba(255,255,255,.04)';
+        t.style.borderColor   = i === idx ? 'rgba(201,162,39,.5)'  : '#1a3d1a';
+        t.style.color         = i === idx ? '#e8c84a'              : '#4a6a4a';
+      });
+    }
+
+    for (const [idx, j] of jogos.entries()) {
+      // Tab
+      const tab = document.createElement('button');
+      tab.setAttribute('data-tab', idx);
+      tab.style.cssText = 'background:rgba(255,255,255,.04);border:1px solid #1a3d1a;border-radius:20px;padding:.35rem 1rem;font-size:.78rem;color:#4a6a4a;cursor:pointer;font-weight:600;letter-spacing:.5px;transition:all .2s;white-space:nowrap';
+      tab.textContent = `${j.casa} ${j.placar} ${j.fora}`;
+      tab.onclick = () => mostrarJogo(idx);
+      tabsEl.appendChild(tab);
+
+      // Slide
+      const slide = document.createElement('div');
+      slide.setAttribute('data-slide', idx);
+      slide.style.display = 'none';
+
       const card = document.createElement('div');
-      card.style.cssText = 'background:#0d1a0d;border:1px solid #1a3d1a;border-radius:14px;overflow:hidden;margin-bottom:1.25rem';
+      card.style.cssText = 'background:#0d1a0d;border:1px solid #1a3d1a;border-radius:14px;overflow:hidden';
 
       // Header do jogo
       const hg = j.gols_casa ?? 0, ag = j.gols_fora ?? 0;
@@ -12193,8 +12227,11 @@ atualizarPips();
 
       bodyHtml += '</div>';
       card.innerHTML += bodyHtml;
-      cardsEl.appendChild(card);
+      slide.appendChild(card);
+      slidesEl.appendChild(slide);
     }
+
+    if (jogos.length > 0) mostrarJogo(0);
 
     // Tabela de classificação (standings)
     if (d.standings?.standings?.length) {
