@@ -1,0 +1,18 @@
+name = "scout-analise-cron"
+main = "index.js"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "scout-data-fc-db"
+database_id = "406b3660-bc10-4105-9f2c-3582c4e4fc08"
+
+[triggers]
+crons = ["0 6 * * *"]
+# Roda todo dia às 06:00 UTC (03:00 BRasília)
+# Ajuste conforme o horário dos jogos — para jogos noturnos use "0 9 * * *"
+
+# Secrets (set via: wrangler secret put <NAME>)
+# API_FOOTBALL_KEY
+# RAPIDAPI_KEY
+# ANTHROPIC_API_KEY
