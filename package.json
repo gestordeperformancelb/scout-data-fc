@@ -12,7 +12,9 @@
     "sync": "RAPIDAPI_KEY=$RAPIDAPI_KEY node scripts/sync-sofascore.js",
     "build-painel": "node scripts/build-painel.js",
     "sync-stats": "RAPIDAPI_KEY=$RAPIDAPI_KEY node scripts/sync-stats-clube.js",
-    "db:migrate2": "wrangler d1 execute scout-data-fc-db --file=migrations/0002_sofascore_data.sql --remote"
+    "db:migrate2": "wrangler d1 execute scout-data-fc-db --file=migrations/0002_sofascore_data.sql --remote",
+    "db:migrate5": "wrangler d1 execute scout-data-fc-db --file=migrations/0005_analise_dia.sql --remote",
+    "analise-dia": "node scripts/analise-dia.js"
   },
   "devDependencies": {
     "wrangler": "^3.57.0"
