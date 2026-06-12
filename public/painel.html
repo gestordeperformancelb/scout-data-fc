@@ -11698,7 +11698,7 @@ tr.sel-row:hover td{background:#0d1a0d}
     </div>
   </div>
 
-  <div id="analise-content" style="display:none;max-width:860px;margin:0 auto;padding:1.5rem">
+  <div id="analise-content" style="display:none;max-width:900px;margin:0 auto;padding:1.5rem">
 
     <!-- Hero header -->
     <div style="background:linear-gradient(135deg,#0d1a0d 0%,#112211 60%,#1a2e0a 100%);border:1px solid #2a4d1a;border-radius:16px;padding:1.75rem 2rem;margin-bottom:1.5rem;position:relative;overflow:hidden">
@@ -11712,6 +11712,9 @@ tr.sel-row:hover td{background:#0d1a0d}
         <div id="analise-jogos" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start"></div>
       </div>
     </div>
+
+    <!-- Cards dos jogos (dinâmico) -->
+    <div id="analise-jogos-cards" style="margin-bottom:1.5rem"></div>
 
     <!-- Texto da análise -->
     <div id="analise-texto" style="color:#c8d8c8;font-size:.95rem;line-height:1.9;background:#0d1a0d;border:1px solid #1a3d1a;border-left:3px solid #c9a227;border-radius:0 10px 10px 0;padding:1.75rem 1.75rem 1.75rem 1.5rem;margin-bottom:1.5rem"></div>
@@ -12085,6 +12088,112 @@ atualizarPips();
       b.style.cssText = 'background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.3);border-radius:20px;padding:.3rem .9rem;font-size:.78rem;color:#e8c84a;white-space:nowrap;font-weight:600;letter-spacing:.5px';
       b.textContent = `${j.casa} ${j.placar} ${j.fora}`;
       jogosEl.appendChild(b);
+    }
+
+    // Cards detalhados por jogo
+    const cardsEl = document.getElementById('analise-jogos-cards');
+    for (const j of (d.jogos ?? [])) {
+      const card = document.createElement('div');
+      card.style.cssText = 'background:#0d1a0d;border:1px solid #1a3d1a;border-radius:14px;overflow:hidden;margin-bottom:1.25rem';
+
+      // Header do jogo
+      const hg = j.gols_casa ?? 0, ag = j.gols_fora ?? 0;
+      const winner = hg > ag ? 'casa' : ag > hg ? 'fora' : 'empate';
+      let headerHtml = `<div style="background:linear-gradient(135deg,#111f11,#0d1a0d);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;border-bottom:1px solid #1a3d1a">
+        <div style="display:flex;align-items:center;gap:.6rem;flex:1;min-width:0">
+          ${j.casaLogo ? `<img src="${j.casaLogo}" style="width:32px;height:32px;object-fit:contain;flex-shrink:0">` : ''}
+          <span style="color:${winner==='casa'?'#f4f9f4':'#8a9a8a'};font-weight:${winner==='casa'?'800':'500'};font-size:.95rem;white-space:nowrap">${j.casa}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#c9a227;letter-spacing:4px;line-height:1">${j.placar ?? '? – ?'}</span>
+          <span style="font-size:.6rem;color:#3a5a3a;letter-spacing:2px;margin-top:.15rem">ENCERRADO</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;flex:1;min-width:0;justify-content:flex-end">
+          <span style="color:${winner==='fora'?'#f4f9f4':'#8a9a8a'};font-weight:${winner==='fora'?'800':'500'};font-size:.95rem;white-space:nowrap">${j.fora}</span>
+          ${j.foraLogo ? `<img src="${j.foraLogo}" style="width:32px;height:32px;object-fit:contain;flex-shrink:0">` : ''}
+        </div>
+      </div>`;
+      card.innerHTML = headerHtml;
+
+      let bodyHtml = '<div style="padding:1rem 1.25rem;display:flex;flex-direction:column;gap:1rem">';
+
+      // Gols e eventos
+      const gols = (j.eventos ?? []).filter(e => e.tipo === 'Goal' || e.tipo === 'OwnGoal');
+      const cartoes = (j.eventos ?? []).filter(e => e.tipo === 'Yellow Card' || e.tipo === 'Red Card');
+      if (gols.length > 0 || cartoes.length > 0) {
+        bodyHtml += `<div>
+          <div style="font-size:.6rem;color:#3a5a3a;letter-spacing:2px;font-weight:700;margin-bottom:.5rem">EVENTOS</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem">`;
+        for (const ev of (j.eventos ?? []).filter(e => ['Goal','OwnGoal','Yellow Card','Red Card'].includes(e.tipo))) {
+          const icon = ev.tipo==='Goal'?'⚽':ev.tipo==='OwnGoal'?'⚽🔴':ev.tipo==='Yellow Card'?'🟨':'🟥';
+          bodyHtml += `<span style="background:rgba(255,255,255,.04);border:1px solid #1a3d1a;border-radius:20px;padding:.25rem .75rem;font-size:.75rem;color:#c8d8c8;white-space:nowrap">
+            ${icon} <strong style="color:#e8c84a">${ev.minuto}'</strong> ${ev.jogador}${ev.assist?` <span style="color:#4a6a4a;font-size:.7rem">(${ev.assist})</span>`:''}
+          </span>`;
+        }
+        bodyHtml += '</div></div>';
+      }
+
+      // Estatísticas
+      const st = j.estatisticas;
+      if (st?.casa && st?.fora) {
+        const statBar = (label, va, vb, pct=false) => {
+          const a = parseFloat(va) || 0, b = parseFloat(vb) || 0;
+          const tot = a + b || 1;
+          const pctA = Math.round(a / tot * 100);
+          const dispA = pct ? va : a;
+          const dispB = pct ? vb : b;
+          return `<div>
+            <div style="display:flex;justify-content:space-between;font-size:.72rem;color:#8a9a8a;margin-bottom:.2rem">
+              <span style="color:#c8d8c8;font-weight:600">${dispA ?? '—'}</span>
+              <span style="color:#4a6a4a">${label}</span>
+              <span style="color:#c8d8c8;font-weight:600">${dispB ?? '—'}</span>
+            </div>
+            <div style="display:flex;height:4px;border-radius:2px;overflow:hidden;background:#0a140a">
+              <div style="width:${pct?(parseFloat(va)||50)+'%':pctA+'%'};background:#4caf50;transition:width .6s"></div>
+              <div style="flex:1;background:#1a3d1a"></div>
+            </div>
+          </div>`;
+        };
+        bodyHtml += `<div>
+          <div style="font-size:.6rem;color:#3a5a3a;letter-spacing:2px;font-weight:700;margin-bottom:.6rem">ESTATÍSTICAS</div>
+          <div style="display:flex;flex-direction:column;gap:.6rem">
+            ${statBar('Posse (%)', st.casa.posse, st.fora.posse, true)}
+            ${statBar('Finalizações', st.casa.finalizacoes, st.fora.finalizacoes)}
+            ${statBar('No Alvo', st.casa.finalizacoes_alvo, st.fora.finalizacoes_alvo)}
+            ${statBar('Escanteios', st.casa.escanteios, st.fora.escanteios)}
+            ${statBar('Faltas', st.casa.faltas, st.fora.faltas)}
+          </div>
+        </div>`;
+      }
+
+      // Destaques do jogo
+      if (j.destaques?.length) {
+        bodyHtml += `<div>
+          <div style="font-size:.6rem;color:#3a5a3a;letter-spacing:2px;font-weight:700;margin-bottom:.6rem">DESTAQUES DO JOGO</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.6rem">`;
+        for (const [i, p] of j.destaques.entries()) {
+          const ratingColor = p.rating >= 8 ? '#c9a227' : p.rating >= 7 ? '#4caf50' : '#8a9a8a';
+          bodyHtml += `<div style="background:rgba(255,255,255,.03);border:1px solid #1a3d1a;border-radius:10px;padding:.6rem .8rem;display:flex;align-items:center;gap:.6rem;flex:1;min-width:160px">
+            ${p.foto ? `<img src="${p.foto}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid #1a3d1a;flex-shrink:0">` : `<div style="width:36px;height:36px;border-radius:50%;background:#111f11;border:1px solid #1a3d1a;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0">👤</div>`}
+            <div style="min-width:0">
+              <div style="font-size:.8rem;color:#f4f9f4;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.nome}</div>
+              <div style="font-size:.65rem;color:#4a6a4a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.time}</div>
+              <div style="display:flex;gap:.4rem;margin-top:.2rem;flex-wrap:wrap">
+                <span style="font-size:.7rem;color:${ratingColor};font-weight:800">${p.rating?.toFixed(1)??'—'}</span>
+                ${p.gols > 0 ? `<span style="font-size:.65rem;color:#c8d8c8">⚽${p.gols}</span>` : ''}
+                ${p.assists > 0 ? `<span style="font-size:.65rem;color:#c8d8c8">🅰️${p.assists}</span>` : ''}
+                ${p.finalizacoes > 0 ? `<span style="font-size:.65rem;color:#4a6a4a">${p.finalizacoes} fin</span>` : ''}
+                ${p.passes_chave > 0 ? `<span style="font-size:.65rem;color:#4a6a4a">${p.passes_chave} pk</span>` : ''}
+              </div>
+            </div>
+          </div>`;
+        }
+        bodyHtml += '</div></div>';
+      }
+
+      bodyHtml += '</div>';
+      card.innerHTML += bodyHtml;
+      cardsEl.appendChild(card);
     }
 
     // Tabela de classificação (standings)
