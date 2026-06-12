@@ -12118,7 +12118,8 @@ atualizarPips();
       const tab = document.createElement('button');
       tab.setAttribute('data-tab', idx);
       tab.style.cssText = 'background:rgba(255,255,255,.04);border:1px solid #1a3d1a;border-radius:20px;padding:.35rem 1rem;font-size:.78rem;color:#4a6a4a;cursor:pointer;font-weight:600;letter-spacing:.5px;transition:all .2s;white-space:nowrap';
-      tab.textContent = `${j.casa} ${j.placar} ${j.fora}`;
+      const dataLabel = j._data ? new Date(j._data + 'T12:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) : '';
+      tab.textContent = `${j.casa} ${j.placar} ${j.fora}${dataLabel ? ' · ' + dataLabel : ''}`;
       tab.onclick = () => mostrarJogo(idx);
       tabsEl.appendChild(tab);
 
